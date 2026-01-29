@@ -24,12 +24,12 @@ function showProducts(products) {
 
   products.forEach(product => {
     productList.innerHTML += `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-        <img src="${product.thumbnail}" width="150">
-        <h3>${product.title}</h3>
-        <p>₹ ${product.price}</p>
-      </div>
-    `;
+  <div class="product-card">
+    <img src="${product.thumbnail}" width="150">
+    <h3>${product.title}</h3>
+    <p>₹ ${product.price}</p>
+  </div>
+`;
   });
 }
 
