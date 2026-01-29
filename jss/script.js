@@ -1,15 +1,16 @@
-console.log("JS Connected"); // IMPORTANT
+console.log("JS Connected");
 
+// Get elements
 const productList = document.getElementById("productList");
 const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
 let allProducts = [];
 
-// Fetch API
+// Fetch products from API
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
-    console.log(data.products); // check data
     allProducts = data.products;
     showProducts(allProducts);
   })
@@ -18,25 +19,29 @@ fetch("https://dummyjson.com/products")
     productList.innerHTML = "Error loading products";
   });
 
+// Display products
 function showProducts(products) {
   productList.innerHTML = "";
 
   products.forEach(product => {
-    productList.innerHTML += `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-        <img src="${product.thumbnail}" width="150">
-        <h3>${product.title}</h3>
-        <p>₹ ${product.price}</p>
-      </div>
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <img src="${product.thumbnail}" alt="${product.title}" width="150">
+      <h3>${product.title}</h3>
+      <p>₹ ${product.price}</p>
     `;
+
+    productList.appendChild(card);
   });
 }
 
-// Search
-searchInput.addEventListener("keyup", () => {
-  const value = searchInput.value.toLowerCase();
-  const filtered = allProducts.filter(p =>
-    p.title.toLowerCase().includes(value)
-  );
-  showProducts(filtered);
+// Search button → redirect to search.html
+searchBtn.addEventListener("click", () => {
+  const value = searchInput.value.trim();
+  if (value) {
+    window.location.href = `search.html?search=${encodeURIComponent(value)}`;
+  }
 });
+
