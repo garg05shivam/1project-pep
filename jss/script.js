@@ -1,26 +1,23 @@
-// Get elements
 const productList = document.getElementById("productList");
 const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
 
-let allProducts = []; // will store products from API
+let allProducts = [];
 
-// 1. Get data from API
+// Fetch products
 fetch("https://dummyjson.com/products")
   .then(response => response.json())
   .then(data => {
-    // API gives: { products: [ ... ] }
     allProducts = data.products;
-    showProducts(allProducts); // show all when page loads
+    showProducts(allProducts);
   })
   .catch(error => {
     console.log("Error:", error);
     productList.innerHTML = "<p>Failed to load products.</p>";
   });
 
-// 2. Function to display products
+// Show products
 function showProducts(list) {
-  productList.innerHTML = ""; // clear old items
+  productList.innerHTML = "";
 
   list.forEach(product => {
     const card = document.createElement("div");
@@ -36,8 +33,8 @@ function showProducts(list) {
   });
 }
 
-// 3. Function to search/filter
-function filterProducts() {
+// Live search
+searchInput.addEventListener("keyup", () => {
   const text = searchInput.value.toLowerCase();
 
   const filtered = allProducts.filter(product =>
@@ -45,8 +42,4 @@ function filterProducts() {
   );
 
   showProducts(filtered);
-}
-
-// 4. Events
-searchBtn.addEventListener("click", filterProducts);
-searchInput.addEventListener("keyup", filterProducts); // live search while typing
+});
