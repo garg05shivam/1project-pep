@@ -2,6 +2,7 @@ console.log("JS Connected"); // IMPORTANT
 
 const productList = document.getElementById("productList");
 const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
 let allProducts = [];
 
