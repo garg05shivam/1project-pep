@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Product container */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Product card */
+.product-list > div {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* Product image */
+.product-list img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+/* Product name */
+.product-list h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+/* Product price */
+.product-list p {
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -1,45 +1,42 @@
+console.log("JS Connected"); // IMPORTANT
+
 const productList = document.getElementById("productList");
 const searchInput = document.getElementById("searchInput");
 
 let allProducts = [];
 
-// Fetch products
+// Fetch API
 fetch("https://dummyjson.com/products")
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
+    console.log(data.products); // check data
     allProducts = data.products;
     showProducts(allProducts);
   })
-  .catch(error => {
-    console.log("Error:", error);
-    productList.innerHTML = "<p>Failed to load products.</p>";
+  .catch(err => {
+    console.error(err);
+    productList.innerHTML = "Error loading products";
   });
 
-// Show products
-function showProducts(list) {
+function showProducts(products) {
   productList.innerHTML = "";
 
-  list.forEach(product => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-
-    card.innerHTML = `
-      <img src="${product.thumbnail}" alt="${product.title}" class="product-img">
-      <h3 class="product-name">${product.title}</h3>
-      <p class="product-price">₹ ${product.price}</p>
+  products.forEach(product => {
+    productList.innerHTML += `
+      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <img src="${product.thumbnail}" width="150">
+        <h3>${product.title}</h3>
+        <p>₹ ${product.price}</p>
+      </div>
     `;
-
-    productList.appendChild(card);
   });
 }
 
-// Live search
+// Search
 searchInput.addEventListener("keyup", () => {
-  const text = searchInput.value.toLowerCase();
-
-  const filtered = allProducts.filter(product =>
-    product.title.toLowerCase().includes(text)
+  const value = searchInput.value.toLowerCase();
+  const filtered = allProducts.filter(p =>
+    p.title.toLowerCase().includes(value)
   );
-
   showProducts(filtered);
 });
