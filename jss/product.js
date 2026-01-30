@@ -19,6 +19,7 @@ if (!productId) {
             <p><strong>Brand:</strong> ${product.brand}</p>
             <p><strong>Category:</strong> ${product.category}</p>
             <p>${product.description}</p>
+            <p>${product.availabilityStatus}</p>
           </div>
         </div>
       `;
