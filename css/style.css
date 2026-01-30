@@ -151,3 +151,33 @@ button:active {
 #clearHistoryBtn:hover {
   background-color: #b91c1c;
 }
+/* ===== PRODUCT DETAIL PAGE ===== */
+.product-detail-container {
+  margin-top: 30px;
+}
+
+.product-detail-card {
+  display: flex;
+  gap: 30px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.product-detail-card img {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+.product-detail-card .details {
+  max-width: 500px;
+}
+
+.product-detail-card .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #16a34a;
+  margin: 10px 0;
+}

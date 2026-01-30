@@ -115,3 +115,21 @@ searchInput.addEventListener("input", () => {
     suggestionsBox.appendChild(div);
   });
 });
+
+function showProducts(products) {
+  productList.innerHTML = "";
+
+  products.forEach(product => {
+    productList.innerHTML += `
+      <div class="product-card" onclick="openProduct(${product.id})">
+        <img src="${product.thumbnail}" width="150">
+        <h3>${product.title}</h3>
+        <p>₹ ${product.price}</p>
+      </div>
+    `;
+  });
+}
+
+function openProduct(id) {
+  window.location.href = `product.html?id=${id}`;
+}
