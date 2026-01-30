@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Store</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="jss/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Store</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JS (folder name = jss ✔) -->
+  <script src="jss/script.js" defer></script>
 </head>
 <body>
 
-    <h1>Product Store</h1>
+  <h1>Product Store</h1>
 
-    <input type="text" id="searchInput" placeholder="Search Your Product Here..." class="search-box">
+  <!-- 🔹 Search + Buttons -->
+  <div class="top-bar">
+    <div class="search-wrapper">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Your Product Here..."
+        class="search-box"
+      />
+      <!-- Suggestions must be just below input -->
+      <div id="suggestions" class="suggestions-box"></div>
+    </div>
+
     <button id="searchBtn">Search</button>
     <button id="historyBtn">View History</button>
+  </div>
 
-
-    <div id="productList" class="product-list"></div>
+  <!-- 🔹 Products -->
+  <div id="productList" class="product-list"></div>
 
 </body>
 </html>

@@ -41,3 +41,44 @@ body {
   font-size: 14px;
   font-weight: bold;
 }
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-box {
+  width: 280px;
+  padding: 6px;
+}
+
+/* suggestion dropdown */
+.suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.suggestions-box div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-box div:hover {
+  background-color: #f0f0f0;
+}
+
+

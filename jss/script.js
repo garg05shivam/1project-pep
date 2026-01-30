@@ -66,3 +66,37 @@ if (historyBtn) {
     window.location.href = "history.html";
   });
 }
+
+const suggestionsBox = document.getElementById("suggestions");
+
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase().trim();
+  suggestionsBox.innerHTML = "";
+
+  if (!value || allProducts.length === 0) return;
+
+  const matches = allProducts
+    .filter(p => p.title.toLowerCase().includes(value))
+    .slice(0, 5);
+
+  if (matches.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  suggestionsBox.style.display = "block";
+
+  matches.forEach(product => {
+    const div = document.createElement("div");
+    div.textContent = product.title;
+
+    div.onclick = () => {
+      searchInput.value = product.title;
+      suggestionsBox.innerHTML = "";
+      window.location.href = `search.html?search=${encodeURIComponent(product.title)}`;
+    };
+
+    suggestionsBox.appendChild(div);
+  });
+});
+
