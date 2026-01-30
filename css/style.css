@@ -221,3 +221,12 @@ button:active {
   font-weight: bold;
   color: #16a34a;
 }
+#clearVisitedBtn {
+  margin-bottom: 15px;
+  background-color: #dc2626;
+}
+
+#clearVisitedBtn:hover {
+  background-color: #b91c1c;
+}
+
