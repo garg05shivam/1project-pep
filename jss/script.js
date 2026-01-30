@@ -1,18 +1,22 @@
 console.log("JS Connected");
 
 const productList = document.getElementById("productList");
+const pagination = document.getElementById("pagination");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const historyBtn = document.getElementById("historyBtn");
 const suggestionsBox = document.getElementById("suggestions");
 
 let allProducts = [];
+let currentPage = 1;
+const itemsPerPage = 6;
 
 // 🔹 Fetch products
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
     allProducts = data.products;
+    currentPage = 1;
     showProducts(allProducts);
   })
   .catch(err => {
@@ -20,22 +24,59 @@ fetch("https://dummyjson.com/products")
     productList.innerHTML = "<p>Error loading products</p>";
   });
 
-// 🔹 Show all products
+// 🔹 Show products with pagination
 function showProducts(products) {
   productList.innerHTML = "";
 
-  products.forEach(product => {
-    productList.innerHTML += `
-      <div class="product-card">
-        <img src="${product.thumbnail}" width="150">
-        <h3>${product.title}</h3>
-        <p>₹ ${product.price}</p>
-      </div>
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const paginatedProducts = products.slice(start, end);
+
+  paginatedProducts.forEach(product => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.style.cursor = "pointer";
+
+    card.innerHTML = `
+      <img src="${product.thumbnail}" width="150">
+      <h3>${product.title}</h3>
+      <p>₹ ${product.price}</p>
     `;
+
+    card.onclick = () => {
+      window.location.href = `product.html?id=${product.id}`;
+    };
+
+    productList.appendChild(card);
   });
+
+  renderPagination(products.length);
 }
 
-// 🔹 Search button (UPDATED HISTORY LOGIC)
+// 🔹 Render pagination buttons
+function renderPagination(totalItems) {
+  pagination.innerHTML = "";
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+
+    if (i === currentPage) {
+      btn.disabled = true;
+    }
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      showProducts(allProducts);
+    });
+
+    pagination.appendChild(btn);
+  }
+}
+
+// 🔹 Search button (history logic)
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {
     const value = searchInput.value.trim();
@@ -43,13 +84,9 @@ if (searchBtn) {
 
     let history = JSON.parse(localStorage.getItem("history")) || [];
 
-    // remove invalid entries
     history = history.filter(item => typeof item === "object" && item.text);
-
-    // 🔥 remove old entry if exists
     history = history.filter(item => item.text !== value);
 
-    // 🔥 add new entry with updated time (goes to last)
     history.push({
       text: value,
       time: new Date().toLocaleString()
@@ -68,7 +105,7 @@ if (historyBtn) {
   });
 }
 
-// 🔹 Suggestions logic (unchanged, stable)
+// 🔹 Suggestions logic
 searchInput.addEventListener("input", () => {
   const value = searchInput.value.toLowerCase().trim();
   suggestionsBox.innerHTML = "";
@@ -97,7 +134,6 @@ searchInput.addEventListener("input", () => {
       searchInput.value = product.title;
       suggestionsBox.style.display = "none";
 
-      // 🔥 update history on suggestion click also
       let history = JSON.parse(localStorage.getItem("history")) || [];
       history = history.filter(item => typeof item === "object" && item.text);
       history = history.filter(item => item.text !== product.title);
@@ -115,21 +151,3 @@ searchInput.addEventListener("input", () => {
     suggestionsBox.appendChild(div);
   });
 });
-
-function showProducts(products) {
-  productList.innerHTML = "";
-
-  products.forEach(product => {
-    productList.innerHTML += `
-      <div class="product-card" onclick="openProduct(${product.id})">
-        <img src="${product.thumbnail}" width="150">
-        <h3>${product.title}</h3>
-        <p>₹ ${product.price}</p>
-      </div>
-    `;
-  });
-}
-
-function openProduct(id) {
-  window.location.href = `product.html?id=${id}`;
-}

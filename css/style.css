@@ -230,3 +230,42 @@ button:active {
   background-color: #b91c1c;
 }
 
+
+  /* PAGINATION – CLEAN TAB STYLE*/
+.pagination {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Normal buttons */
+.pagination button {
+  width: 42px;
+  height: 38px;               /* less height = no arrow feel */
+  border-radius: 10px;        /* softer, not pill */
+  border: none;
+
+  background: #f3f6ff;
+  color: #4338ca;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.12);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover */
+.pagination button:hover:not(:disabled) {
+  background: #e4e9ff;
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.22);
+}
+
+/* Active page */
+.pagination button:disabled {
+  background: #4f46e5;        /* solid, calm */
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
+  cursor: default;
+}
