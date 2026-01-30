@@ -181,3 +181,43 @@ button:active {
   color: #16a34a;
   margin: 10px 0;
 }
+/* PRODUCT DETAIL PAGE */
+.product-detail-card {
+  display: flex;
+  gap: 30px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin-top: 30px;
+}
+
+.image-gallery {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 320px;
+}
+
+.gallery-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.details {
+  max-width: 500px;
+}
+
+.details h4 {
+  margin-top: 15px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #16a34a;
+}
