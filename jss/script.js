@@ -1,13 +1,13 @@
 console.log("JS Connected");
 
-// Get elements
 const productList = document.getElementById("productList");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
+const historyBtn = document.getElementById("historyBtn");
 
 let allProducts = [];
 
-// Fetch products from API
+// Fetch products
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
@@ -16,31 +16,53 @@ fetch("https://dummyjson.com/products")
   })
   .catch(err => {
     console.error(err);
-    productList.innerHTML = "Error loading products";
+    productList.innerHTML = "<p>Error loading products</p>";
   });
 
-// Display products
 function showProducts(products) {
   productList.innerHTML = "";
 
   products.forEach(product => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-
-    card.innerHTML = `
-      <img src="${product.thumbnail}" alt="${product.title}" width="150">
-      <h3>${product.title}</h3>
-      <p>₹ ${product.price}</p>
+    productList.innerHTML += `
+      <div class="product-card">
+        <img src="${product.thumbnail}" width="150">
+        <h3>${product.title}</h3>
+        <p>₹ ${product.price}</p>
+      </div>
     `;
-
-    productList.appendChild(card);
   });
 }
 
-// Search button → redirect to search.html
-searchBtn.addEventListener("click", () => {
-  const value = searchInput.value.trim();
-  if (value) {
+// Search button
+if (searchBtn) {
+  searchBtn.addEventListener("click", () => {
+    const value = searchInput.value.trim();
+    if (!value) return;
+
+   let history = JSON.parse(localStorage.getItem("history")) || [];
+
+// clean old invalid history (strings etc.)
+history = history.filter(item => typeof item === "object" && item.text);
+
+// prevent duplicate search text
+const alreadyExists = history.some(item => item.text === value);
+
+if (!alreadyExists) {
+  history.push({
+    text: value,
+    time: new Date().toLocaleString()
+  });
+}
+
+localStorage.setItem("history", JSON.stringify(history));
+
     window.location.href = `search.html?search=${encodeURIComponent(value)}`;
-  }
-});
+  });
+}
+
+// View history button
+if (historyBtn) {
+  historyBtn.addEventListener("click", () => {
+    window.location.href = "history.html";
+  });
+}
