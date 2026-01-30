@@ -33,3 +33,15 @@ function clearHistory() {
   localStorage.removeItem("history");
   location.reload();
 }
+
+const clearBtn = document.getElementById("clearHistoryBtn");
+
+if (clearBtn) {
+  clearBtn.addEventListener("click", () => {
+    const confirmClear = confirm("Are you sure you want to clear search history?");
+    if (confirmClear) {
+      localStorage.removeItem("history");
+      historyList.innerHTML = "<li>No history found</li>";
+    }
+  });
+}

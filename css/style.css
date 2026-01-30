@@ -142,3 +142,12 @@ button:active {
   font-weight: 600;
   color: #16a34a;
 }
+
+#clearHistoryBtn {
+  margin-bottom: 15px;
+  background-color: #dc2626;
+}
+
+#clearHistoryBtn:hover {
+  background-color: #b91c1c;
+}
