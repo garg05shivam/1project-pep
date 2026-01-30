@@ -44,4 +44,3 @@ searchBtn.addEventListener("click", () => {
     window.location.href = `search.html?search=${encodeURIComponent(value)}`;
   }
 });
-
