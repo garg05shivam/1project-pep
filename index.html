@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Store</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
-  <!-- JS -->
+  
   <script src="jss/script.js" defer></script>
 </head>
 <body>
 
-  <!-- PAGE TITLE -->
-  <h1 class="page-title">Product Store</h1>
+  
+  <header class="header">
+    <h1 class="page-title">Product Store</h1>
 
-  <!-- TOP BAR -->
-  <div class="top-bar center-bar">
-    <div class="search-wrapper">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search Your Product Here..."
-        class="search-box"
-      />
-      <div id="suggestions" class="suggestions-box"></div>
+   
+    <div class="top-bar center-bar">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-box"
+          placeholder="Search Your Product Here..."
+        />
+        
+        <div id="suggestions" class="suggestions-box"></div>
+      </div>
+
+      <button id="searchBtn">Search</button>
+      <button id="historyBtn">Search History</button>
+      <button onclick="window.location.href='viewed.html'">
+        View History
+      </button>
     </div>
+  </header>
 
-    <button id="searchBtn">Search</button>
-    <button id="historyBtn">Search History</button>
-    <button onclick="window.location.href='viewed.html'">
-      View History
-    </button>
-  </div>
-
-  <!-- PRODUCT + PAGINATION SECTION -->
-  <div class="product-section">
+  <main class="product-section">
     <div id="productList" class="product-list"></div>
     <div id="pagination" class="pagination"></div>
-  </div>
+  </main>
 
 </body>
 </html>

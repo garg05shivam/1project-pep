@@ -11,34 +11,44 @@ let allProducts = [];
 let currentPage = 1;
 const itemsPerPage = 6;
 
-// Fetch products
+/* =========================
+   FETCH PRODUCTS
+========================= */
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
     allProducts = data.products;
     currentPage = 1;
-    showProducts(allProducts);
+    updatePage();
   })
   .catch(err => {
     console.error(err);
     productList.innerHTML = "<p>Error loading products</p>";
   });
 
-//  Show products with pagination
+/* =========================
+   UPDATE PAGE
+========================= */
+function updatePage() {
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
+  showProducts(allProducts.slice(start, end));
+  renderPagination(allProducts.length);
+}
+
+/* =========================
+   SHOW PRODUCTS
+========================= */
 function showProducts(products) {
   productList.innerHTML = "";
 
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const paginatedProducts = products.slice(start, end);
-
-  paginatedProducts.forEach(product => {
+  products.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
-    card.style.cursor = "pointer";
 
     card.innerHTML = `
-      <img src="${product.thumbnail}" width="150">
+      <img src="${product.thumbnail}" alt="${product.title}">
       <h3>${product.title}</h3>
       <p>₹ ${product.price}</p>
     `;
@@ -49,41 +59,63 @@ function showProducts(products) {
 
     productList.appendChild(card);
   });
-
-  renderPagination(products.length);
 }
 
-//  Render pagination buttons
+/* =========================
+   PAGINATION (PREV / NEXT)
+========================= */
 function renderPagination(totalItems) {
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+  // PREV BUTTON
+  const prevBtn = document.createElement("button");
+  prevBtn.textContent = "← Prev";
+  prevBtn.className = "nav-btn";
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.onclick = () => {
+    currentPage--;
+    updatePage();
+  };
+  pagination.appendChild(prevBtn);
+
+  // PAGE NUMBERS
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement("button");
     btn.textContent = i;
 
-    if (i === currentPage) {
-      btn.disabled = true;
-    }
+    if (i === currentPage) btn.disabled = true;
 
-    btn.addEventListener("click", () => {
+    btn.onclick = () => {
       currentPage = i;
-      showProducts(allProducts);
-    });
+      updatePage();
+    };
 
     pagination.appendChild(btn);
   }
+
+  // NEXT BUTTON
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next →";
+  nextBtn.className = "nav-btn";
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.onclick = () => {
+    currentPage++;
+    updatePage();
+  };
+  pagination.appendChild(nextBtn);
 }
 
-//  Search button (history logic)
+/* =========================
+   SEARCH BUTTON (HISTORY)
+========================= */
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {
     const value = searchInput.value.trim();
     if (!value) return;
 
     let history = JSON.parse(localStorage.getItem("history")) || [];
-
     history = history.filter(item => typeof item === "object" && item.text);
     history = history.filter(item => item.text !== value);
 
@@ -93,19 +125,22 @@ if (searchBtn) {
     });
 
     localStorage.setItem("history", JSON.stringify(history));
-
     window.location.href = `search.html?search=${encodeURIComponent(value)}`;
   });
 }
 
-//  View history
+/* =========================
+   VIEW SEARCH HISTORY
+========================= */
 if (historyBtn) {
   historyBtn.addEventListener("click", () => {
     window.location.href = "history.html";
   });
 }
 
-//  Suggestions logic
+/* =========================
+   SEARCH SUGGESTIONS
+========================= */
 searchInput.addEventListener("input", () => {
   const value = searchInput.value.toLowerCase().trim();
   suggestionsBox.innerHTML = "";
@@ -144,7 +179,6 @@ searchInput.addEventListener("input", () => {
       });
 
       localStorage.setItem("history", JSON.stringify(history));
-
       window.location.href = `search.html?search=${encodeURIComponent(product.title)}`;
     };
 
