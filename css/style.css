@@ -1,4 +1,6 @@
-/* ===== GLOBAL ===== */
+/* ===============================
+   GLOBAL
+================================ */
 * {
   box-sizing: border-box;
 }
@@ -7,72 +9,76 @@ body {
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   padding: 20px;
   margin: 0;
-  background-color: #f7f9fc;
+  background: linear-gradient(180deg, #f7f9fc, #eef2ff);
   color: #333;
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 28px;
+  color: #1f2937;
 }
 
-/*  TOP BAR  */
+/* ===============================
+   TOP BAR
+================================ */
 .top-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 25px;
+  gap: 14px;
+  margin-bottom: 30px;
 }
 
-/* Search wrapper */
+/* Search */
 .search-wrapper {
   position: relative;
 }
 
 .search-box {
-  width: 300px;
-  padding: 10px 12px;
+  width: 320px;
+  padding: 10px 14px;
   font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.25s ease;
 }
 
 .search-box:focus {
   border-color: #4f46e5;
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
 /* Buttons */
 button {
-  padding: 10px 16px;
+  padding: 10px 18px;
   font-size: 14px;
-  border-radius: 6px;
+  font-weight: 600;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  background-color: #4f46e5;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: #fff;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
 }
 
 button:active {
   transform: scale(0.97);
 }
 
-/* History button variation */
+/* History button */
 #historyBtn {
-  background-color: #6b7280;
+  background: linear-gradient(135deg, #6b7280, #4b5563);
 }
 
-#historyBtn:hover {
-  background-color: #4b5563;
-}
-
-/* ===== SUGGESTIONS ===== */
+/* ===============================
+   SUGGESTIONS
+================================ */
 .suggestions-box {
   position: absolute;
   top: 100%;
@@ -80,9 +86,9 @@ button:active {
   margin-top: 6px;
   width: 100%;
   background: #fff;
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
   max-height: 220px;
   overflow-y: auto;
   z-index: 1000;
@@ -90,111 +96,77 @@ button:active {
 }
 
 .suggestions-box div {
-  padding: 10px 12px;
-  cursor: pointer;
+  padding: 10px 14px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .suggestions-box div:hover {
-  background-color: #f1f5f9;
+  background: #eef2ff;
 }
 
-/* ===== PRODUCT GRID ===== */
+/* ===============================
+   PRODUCT GRID
+================================ */
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
+  gap: 32px;
 }
 
 /* Product card */
-.product-list > div {
+.product-card {
   background: #fff;
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 18px;
+  padding: 22px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
 }
 
-.product-list > div:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
 }
 
 /* Product image */
-.product-list img {
+.product-card img {
   width: 200px;
   height: 150px;
   object-fit: contain;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* Product name */
-.product-list h3 {
+/* Product title */
+.product-card h3 {
   font-size: 16px;
-  margin: 10px 0 6px;
+  margin: 8px 0 6px;
   color: #111827;
 }
 
 /* Product price */
-.product-list p {
+.product-card p {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: #16a34a;
 }
 
-#clearHistoryBtn {
-  margin-bottom: 15px;
-  background-color: #dc2626;
-}
-
-#clearHistoryBtn:hover {
-  background-color: #b91c1c;
-}
-/* ===== PRODUCT DETAIL PAGE ===== */
-.product-detail-container {
-  margin-top: 30px;
-}
-
+/* ===============================
+   PRODUCT DETAIL PAGE
+================================ */
 .product-detail-card {
+  margin-top: 30px;
   display: flex;
   gap: 30px;
   background: #fff;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.product-detail-card img {
-  width: 300px;
-  height: auto;
-  object-fit: contain;
-}
-
-.product-detail-card .details {
-  max-width: 500px;
-}
-
-.product-detail-card .price {
-  font-size: 20px;
-  font-weight: bold;
-  color: #16a34a;
-  margin: 10px 0;
-}
-/* PRODUCT DETAIL PAGE */
-.product-detail-card {
-  display: flex;
-  gap: 30px;
-  background: #fff;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  margin-top: 30px;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
 .image-gallery {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
   max-width: 320px;
 }
@@ -203,69 +175,66 @@ button:active {
   width: 140px;
   height: 140px;
   object-fit: contain;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
 }
 
 .details {
-  max-width: 500px;
+  max-width: 520px;
+}
+
+.details h2 {
+  margin-top: 0;
 }
 
 .details h4 {
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .price {
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 800;
   color: #16a34a;
 }
-#clearVisitedBtn {
-  margin-bottom: 15px;
-  background-color: #dc2626;
-}
 
-#clearVisitedBtn:hover {
-  background-color: #b91c1c;
-}
-
-
-  /* PAGINATION – CLEAN TAB STYLE*/
+/* ===============================
+   PAGINATION (CLEAN & PROFESSIONAL)
+================================ */
 .pagination {
-  margin-top: 40px;
+  margin-top: 45px;
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 
-/* Normal buttons */
 .pagination button {
   width: 42px;
-  height: 38px;               /* less height = no arrow feel */
-  border-radius: 10px;        /* softer, not pill */
+  height: 38px;
+  border-radius: 10px;
   border: none;
-
   background: #f3f6ff;
   color: #4338ca;
   font-size: 14px;
-  font-weight: 600;
-
+  font-weight: 700;
   cursor: pointer;
   box-shadow: 0 6px 14px rgba(79, 70, 229, 0.12);
-  transition: background 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.25s ease;
 }
 
-/* Hover */
 .pagination button:hover:not(:disabled) {
   background: #e4e9ff;
-  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.22);
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.25);
 }
 
-/* Active page */
 .pagination button:disabled {
-  background: #4f46e5;        /* solid, calm */
+  background: #4f46e5;
   color: #fff;
-  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 12px 26px rgba(79, 70, 229, 0.35);
   cursor: default;
 }
