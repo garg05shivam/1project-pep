@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Store</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- JS -->
   <script src="jss/script.js" defer></script>
 </head>
 <body>
 
-  <h1>Product Store</h1>
+  <!-- 🔹 PAGE TITLE -->
+  <h1 class="page-title">Product Store</h1>
 
-  
-  <div class="top-bar">
+  <!-- 🔹 TOP BAR -->
+  <div class="top-bar center-bar">
     <div class="search-wrapper">
       <input
         type="text"
@@ -22,26 +25,21 @@
         placeholder="Search Your Product Here..."
         class="search-box"
       />
-      
       <div id="suggestions" class="suggestions-box"></div>
     </div>
 
     <button id="searchBtn">Search</button>
-    <button id="historyBtn">search History</button>
+    <button id="historyBtn">Search History</button>
     <button onclick="window.location.href='viewed.html'">
-  View History
-</button>
-
-
+      View History
+    </button>
   </div>
 
-
-  <div id="productList" class="product-list"></div>
-
-
-
-<div id="pagination" class="pagination"></div>
-
+  <!-- 🔹 PRODUCT + PAGINATION SECTION -->
+  <div class="product-section">
+    <div id="productList" class="product-list"></div>
+    <div id="pagination" class="pagination"></div>
+  </div>
 
 </body>
 </html>
