@@ -13,15 +13,15 @@ if (!productId) {
     .then(res => res.json())
     .then(product => {
 
-      // ✅ SAVE VISITED PRODUCT
+      // SAVE VISITED PRODUCT
       saveVisitedProduct(product);
 
-      // ✅ IMAGE GALLERY
+      // IMAGE GALLERY
       const imagesHTML = product.images
         .map(img => `<img src="${img}" class="gallery-img" alt="${product.title}">`)
         .join("");
 
-      // ✅ SHOW PRODUCT DETAILS
+      // SHOW PRODUCT DETAILS
       productDetails.innerHTML = `
         <div class="product-detail-card">
 

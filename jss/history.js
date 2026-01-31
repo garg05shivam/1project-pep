@@ -28,7 +28,7 @@ if (history.length === 0) {
   });
 }
 
-// clear history function
+// clear history clear
 function clearHistory() {
   localStorage.removeItem("history");
   location.reload();

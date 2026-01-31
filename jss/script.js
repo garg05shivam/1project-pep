@@ -11,7 +11,7 @@ let allProducts = [];
 let currentPage = 1;
 const itemsPerPage = 6;
 
-// 🔹 Fetch products
+// Fetch products
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
@@ -24,7 +24,7 @@ fetch("https://dummyjson.com/products")
     productList.innerHTML = "<p>Error loading products</p>";
   });
 
-// 🔹 Show products with pagination
+//  Show products with pagination
 function showProducts(products) {
   productList.innerHTML = "";
 
@@ -53,7 +53,7 @@ function showProducts(products) {
   renderPagination(products.length);
 }
 
-// 🔹 Render pagination buttons
+//  Render pagination buttons
 function renderPagination(totalItems) {
   pagination.innerHTML = "";
 
@@ -76,7 +76,7 @@ function renderPagination(totalItems) {
   }
 }
 
-// 🔹 Search button (history logic)
+//  Search button (history logic)
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {
     const value = searchInput.value.trim();
@@ -98,14 +98,14 @@ if (searchBtn) {
   });
 }
 
-// 🔹 View history
+//  View history
 if (historyBtn) {
   historyBtn.addEventListener("click", () => {
     window.location.href = "history.html";
   });
 }
 
-// 🔹 Suggestions logic
+//  Suggestions logic
 searchInput.addEventListener("input", () => {
   const value = searchInput.value.toLowerCase().trim();
   suggestionsBox.innerHTML = "";
